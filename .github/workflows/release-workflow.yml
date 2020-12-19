@@ -15,7 +15,7 @@ jobs:
             base_url: "https://www.amxmodx.org/amxxdrop/1.8/amxmodx-1.8.3-dev-git5201-base-linux.tar.gz"
           - amxx_version: "1.9.0-git5241"
             base_url: "https://www.amxmodx.org/amxxdrop/1.9/amxmodx-1.9.0-git5241-base-linux.tar.gz"
-          - amxx_version: "1.10.0-git539"
+          - amxx_version: "1.10.0-git5392"
             base_url: "https://www.amxmodx.org/amxxdrop/1.10/amxmodx-1.10.0-git5392-base-linux.tar.gz"
     steps:
       - 
