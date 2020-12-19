@@ -7,9 +7,16 @@ on:
     branches:
       - master
 jobs:
-  build-1_8_2:
-    name: Build image 1.8.2
+  main:
+    name: Build docker image
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - amxx_version: "1.8.2"
+            base_url: "https://www.amxmodx.org/release/amxmodx-1.8.2-base-linux.tar.gz"
+          - amxx_version: "1.8.3"
+            base_url: "https://www.amxmodx.org/amxxdrop/1.8/amxmodx-1.8.3-dev-git5201-base-linux.tar.gz"
     steps:
       -
         name: Check out the repo
@@ -25,24 +32,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           build-args: |
-            BASE_URL=https://www.amxmodx.org/release/amxmodx-1.8.2-base-linux.tar.gz
-
-  build-1_8_3:
-    name: Build image 1.8.3
-    runs-on: ubuntu-latest
-    steps:
-      -
-        name: Check out the repo
-        uses: actions/checkout@v2
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      -
-        name: Build and push to Docker Hub
-        uses: docker/build-push-action@v2
-        with:
-          build-args: |
-            BASE_URL=https://www.amxmodx.org/amxxdrop/1.8/amxmodx-1.8.3-dev-git5201-base-linux.tar.gz
+            BASE_URL=${{ matrix.base_url }}
