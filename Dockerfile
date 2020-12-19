@@ -10,8 +10,8 @@ USER builder
 
 RUN mkdir /home/builder/sources
 
-COPY ./build/compile.sh /home/builder/compile.sh
-COPY ./build/watch.sh /home/builder/watch.sh
+COPY ./compile.sh /home/builder/compile.sh
+COPY ./watch.sh /home/builder/watch.sh
 
 WORKDIR /home/builder
 RUN wget -O build.tar.gz "${BASE_URL}"
