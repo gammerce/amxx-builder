@@ -6,6 +6,17 @@ jobs:
   main:
     name: Build and push docker image to Docker Hub
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - amxx_version: "1.8.2"
+            base_url: "https://www.amxmodx.org/release/amxmodx-1.8.2-base-linux.tar.gz"
+          - amxx_version: "1.8.3-git5201"
+            base_url: "https://www.amxmodx.org/amxxdrop/1.8/amxmodx-1.8.3-dev-git5201-base-linux.tar.gz"
+          - amxx_version: "1.9.0-git5241"
+            base_url: "https://www.amxmodx.org/amxxdrop/1.9/amxmodx-1.9.0-git5241-base-linux.tar.gz"
+          - amxx_version: "1.10.0-git539"
+            base_url: "https://www.amxmodx.org/amxxdrop/1.10/amxmodx-1.10.0-git5392-base-linux.tar.gz"
     steps:
       - 
         name: Check out the repo
@@ -27,6 +38,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: budziam/amxx-builder:1.8.2
+          tags: budziam/amxx-builder:${{ matrix.amxx_version }}
           build-args: |
-            BASE_URL=https://www.amxmodx.org/release/amxmodx-1.8.2-base-linux.tar.gz
+            BASE_URL=${{ matrix.base_url }}
